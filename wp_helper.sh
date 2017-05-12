@@ -23,7 +23,7 @@ for i in "$@"
 	    shift # past argument=value
 	    ;;
 	    --update=*)
-	    UPDATE="${i#*=}" # Do updates - plugins | wp | all.
+	    UPDATE="${i#*=}" # Do updates - plugins | themes | wp | all.
 	    shift # past argument=value
 	    ;;
 	    *)
@@ -86,6 +86,7 @@ for site in ${SITES}; do
 		echo $(wp option get siteurl) \(v$(wp core version)\);
 		echo $(wp core check-update);
 		wp plugin list --format=csv --fields=name,status,update,version,update_version | awk -F',' '$3 == "available" {print "Plugin update: ",$1,"\t",$2,"\t",$4,"->",$5}' | column -t;
+		wp theme list --format=csv --fields=name,status,update,version,update_version | awk -F',' '$3 == "available" {print "Theme update: ",$1,"\t",$2,"\t",$4,"->",$5}' | column -t;
 		echo ========================
 	fi
 
@@ -93,6 +94,10 @@ for site in ${SITES}; do
 	if [ "${UPDATE}" == "plugins" ]; then
 		echo $(wp option get siteurl);
 		wp plugin update --all
+		echo ========================
+	elif [ "${UPDATE}" == "themes" ]; then
+		echo $(wp option get siteurl);
+		wp theme update --all
 		echo ========================
 	elif [ "${UPDATE}" == "wp" ]; then
 		echo $(wp option get siteurl);
@@ -102,6 +107,7 @@ for site in ${SITES}; do
 		echo $(wp option get siteurl);
 		wp core update
 		wp plugin update --all
+		wp theme update --all
 		echo ========================
 	fi
 
