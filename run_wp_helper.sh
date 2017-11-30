@@ -17,7 +17,7 @@ for D in "$PUBLIC"/*; do
 
                 if [[ "$FLAGS" != *"none"* ]]; then
                         echo "Updating" "$SITE""..."
-                        bash /usr/local/bin/wp_helper/wp_helper.sh "$FLAGS" "$SITEFLAG"
+                        bash /usr/local/bin/rhd_wp_helper/run_wp_helper.sh "$FLAGS" "$SITEFLAG"
                 else
                         echo "Skipping" "$SITE""..."
                 fi
