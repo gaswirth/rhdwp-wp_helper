@@ -21,5 +21,7 @@ for D in "$PUBLIC"/*; do
                 else
                         echo "Skipping" "$SITE""..."
                 fi
-        fi
+        else
+		echo "Uh-oh.  Things went poopy and I can't tell you why."
+	fi
 done
